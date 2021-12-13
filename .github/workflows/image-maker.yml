@@ -3,7 +3,7 @@ name: Docker Image Builder
 on:
   schedule:
     # We build 5:00 UTC every day
-    - cron: '0 5 * * *'
+    - cron: '0 * * * *'
 
 env:
   IMAGE_FILE: dockerimg.tar
