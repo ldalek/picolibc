@@ -63,9 +63,13 @@ __kernel_sin(double x, double y, int iy)
         return __math_inexact(x);       /* generate inexact */
     z = x * x;
     v = z * x;
-    r = S2 + z * (S3 + z * (S4 + z * (S5 + z * S6)));
+
+    r = fma(fma(fma(fma(S6,z,S5),z,S4),z,S3),z,S2);
+
+//    r = S2 + z * (S3 + z * (S4 + z * (S5 + z * S6)));
     if (iy == 0)
-        return x + v * (S1 + z * r);
+        return fma(fma(z,r,S1),v,x);
+//        return x + v * (S1 + z * r);
     else
         return x - ((z * (half * y - v * r) - y) - v * S1);
 }

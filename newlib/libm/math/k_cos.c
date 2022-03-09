@@ -69,7 +69,9 @@ __kernel_cos(double x, double y)
     if (ix < 0x3e400000) /* if x < 2**27 */
         return one;
     z = x * x;
-    r = z * (C1 + z * (C2 + z * (C3 + z * (C4 + z * (C5 + z * C6)))));
+//    r = z * (C1 + z * (C2 + z * (C3 + z * (C4 + z * (C5 + z * C6)))));
+    r = z * fma(z,fma(z,fma(z, fma(z, fma(z, C6, C5), C4), C3), C2), C1);
+
     if (ix < 0x3FD33333) /* if |x| < 0.3 */
         return one - (0.5 * z - (z * r - x * y));
     else {
