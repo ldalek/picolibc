@@ -235,6 +235,32 @@ foreach target : targets
        depends: bios_bin,
        env: ['MESON_SOURCE_ROOT=' + meson.source_root()])
 
+  if host_cpu_family == 'arm'
+    arm_fail_tests = ['test-arm-except']
+
+    foreach t1 : arm_fail_tests
+      t1_src = t1 + '.c'
+      if target == ''
+	t1_name = t1
+      else
+	t1_name = t1 + '_' + target
+      endif
+
+      test(t1_name,
+	   executable(t1_name, [t1_src],
+		      c_args: double_printf_compile_args + _c_args,
+		      link_args: double_printf_link_args + _link_args,
+		      link_with: _libs,
+		      link_depends:  test_link_depends,
+		      include_directories: inc),
+           depends: bios_bin,
+	   env: ['MESON_SOURCE_ROOT=' + meson.source_root()],
+	   should_fail: true
+	  )
+    endforeach
+    
+  endif
+
   plain_tests = ['rand', 'regex', 'ungetc', 'fenv',
 		 'math_errhandling', 'malloc', 'tls',
 		 'ffs', 'setjmp', 'atexit', 'on_exit',
