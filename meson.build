@@ -211,6 +211,7 @@ newlib_obsolete_math_float = get_option('newlib-obsolete-math-float')
 newlib_obsolete_math_double = get_option('newlib-obsolete-math-double')
 
 sysroot_install = get_option('sysroot-install')
+system_libc = get_option('system-libc')
 prefix = get_option('prefix')
 
 nm = find_program('nm', required : false)
@@ -491,6 +492,12 @@ if tinystdio
 		' %{DPICOLIBC_INTEGER_PRINTF_SCANF:--defsym=vfscanf=__i_vfscanf}')
 endif
 
+if system_libc
+  specs_isystem = ''
+  specs_libpath = ''
+  specs_startfile = 'crt0%O%s'
+else
+
 #
 # Construct path values for specs file
 #
@@ -610,6 +617,7 @@ endif
 # multilib path or the non-multilib path
 #
 specs_startfile = specs_option_format.format(crt0_prefix, crt0_buildtype, crt0_gen)
+endif
 
 specs_data = configuration_data()
 specs_data.set('SPECS_ISYSTEM', specs_isystem)
