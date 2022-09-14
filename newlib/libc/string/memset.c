@@ -46,7 +46,7 @@ QUICKREF
 #include "local.h"
 
 #define LBLOCKSIZE (sizeof(long))
-#define UNALIGNED(X)   ((long)X & (LBLOCKSIZE - 1))
+#define UNALIGNED(X)   ((uintptr_t)X & (LBLOCKSIZE - 1))
 #define TOO_SMALL(LEN) ((LEN) < LBLOCKSIZE)
 
 #undef memset
