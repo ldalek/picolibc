@@ -92,7 +92,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -143,7 +143,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -193,7 +193,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -244,7 +244,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -295,7 +295,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -345,7 +345,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -395,7 +395,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -446,7 +446,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -496,7 +496,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -547,7 +547,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -598,7 +598,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -648,7 +648,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -698,7 +698,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -749,7 +749,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -799,7 +799,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -850,7 +850,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -901,7 +901,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
@@ -951,7 +951,7 @@ jobs:
           "-Dnewlib-obsolete-math=true -Dwant-math-errno=true",
 
           # Tinystdio configurations
-          "-Dio-float-exact=false -Dio-long-long=true",
+          "-Dio-float-exact=false -Dio-long-long=true -Dio-percent-b=true",
           "-Dformat-default=integer",
 
           # Original stdio
