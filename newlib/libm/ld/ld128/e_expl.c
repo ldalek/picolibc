@@ -124,7 +124,7 @@ if( x > MAXLOGL) {
 if( x < MINLOGL ) {
         if (isinf(x))
                 return 0.0L;
-	return __math_uflow(0);
+	return __math_uflowl(0);
 }
 
 /* Express e**x = e**g 2**n

@@ -64,10 +64,10 @@ fmodl(long double x, long double y)
             return x + y;
 
         if (isinfl(x))
-            return __math_invalid(x);
+            return __math_invalidl(x);
 
         if (y == 0.0L)
-            return __math_invalid(y);
+            return __math_invalidl(y);
 
 	if(ux.bits.ext_exp<=uy.bits.ext_exp) {
 	    if((ux.bits.ext_exp<uy.bits.ext_exp) ||

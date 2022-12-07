@@ -187,7 +187,7 @@ log10l(long double x)
   if (((hx & 0x7fffffffffffffffLL) | lx) == 0)
     return __math_divzerol(1);
   if (hx < 0)
-    return __math_invalid(x);
+    return __math_invalidl(x);
   if (hx >= 0x7fff000000000000LL)
     return (x + x);
 

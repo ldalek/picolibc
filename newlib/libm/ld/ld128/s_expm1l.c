@@ -125,7 +125,7 @@ expm1l(long double x)
 
   /* Minimum value.  */
   if (x < minarg)
-      return __LDBL_DENORM_MIN__ - 1.0L;
+      return __math_inexactl(-1.0L);
 
   /* Express x = ln 2 (k + remainder), remainder not exceeding 1/2. */
   xx = C1 + C2;			/* ln 2. */

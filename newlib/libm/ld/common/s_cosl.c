@@ -51,7 +51,7 @@ cosl(long double x)
 
 	/* If x = NaN or Inf, then cos(x) = NaN. */
 	if (z.bits.exp == 32767)
-                return __math_invalid(x);
+                return __math_invalidl(x);
 
 	/* Optimize the case where x is already within range. */
 	if (z.e < _M_PI_4L)

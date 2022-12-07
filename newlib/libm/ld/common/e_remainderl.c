@@ -32,8 +32,8 @@ remainderl(long double x, long double y)
 {
 	int quo;
 
-        if (isinfl(x) || y == 0.0)
-            return __math_invalid(x);
+        if (isinfl(x) || y == 0.0L)
+            return __math_invalidl(x);
 
 	return (remquol(x, y, &quo));
 }

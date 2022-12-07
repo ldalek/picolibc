@@ -217,26 +217,29 @@ tgammal(long double x)
 long double p, q, z;
 int i;
 
-if( isnanl(x) )
+if( isnan(x) )
         return(x + x);
 if(x == (long double) INFINITY)
 	return((long double) INFINITY);
 if(x == -(long double) INFINITY)
-	return __math_invalid(x);
+	return __math_invalidl(x);
 if( x == 0.0L )
-	return __math_divzero(__signbitl(x));
+	return __math_divzerol(__signbitl(x));
 q = fabsl(x);
 
 if( q > 13.0L )
 	{
 	int sign = 1;
-	if( q > MAXGAML )
-		goto goverf;
+	if( q > MAXGAML ) {
+                if (x < 0.0L)
+                        return __math_invalidl(x);
+                return __math_oflowl(0);
+        }
 	if( x < 0.0L )
 		{
 		p = floorl(q);
 		if( p == q )
-			return __math_invalid(x);
+			return __math_invalidl(x);
 		i = p;
 		if( (i & 1) == 0 )
 			sign = -1;
@@ -250,7 +253,6 @@ if( q > 13.0L )
 		z = fabsl(z) * stirf(q);
 		if( z <= PIL/LDBL_MAX )
 			{
-goverf:
                         return __math_oflowl(sign < 0);
 			}
 		z = PIL/z;
@@ -295,16 +297,20 @@ return z;
 
 small:
 if( x == 0.0L )
-	return (x - x) / (x - x);
+        return __math_invalidl(x);
 else
 	{
-	if( x < 0.0L )
-		{
-		x = -x;
-		q = z / (x * __polevll( x, SN, 8 ));
-		}
-	else
-		q = z / (x * __polevll( x, S, 8 ));
+        q = check_oflowl(1.0L/x);
+        if (!isinfl(q))
+                {
+                if( x < 0.0L )
+                        {
+                        x = -x;
+                        q = z / __polevll( x, SN, 8 ) * (-q);
+                        }
+                else
+                        q = z / __polevll( x, S, 8 ) * q;
+                }
 	}
 return q;
 }

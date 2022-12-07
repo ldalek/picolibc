@@ -206,9 +206,17 @@ w = floorl(y);
 /* Set iyflg to 1 if y is an integer.  */
 iyflg = (w == y);
 
+/* Test for odd integer y.  */
+yoddint = 0;
+if( iyflg )
+	{
+        ya = ldexpl(y, -1);
+        yoddint = (ya != floorl(ya));
+	}
+
 if( x == 0.0L) {
         if( y < 0 )
-                return __math_divzerol(__signbitl(x) && iyflg);
+                return __math_divzerol(__signbitl(x) && yoddint);
 }
 
 if( isnanl(x) )
@@ -265,13 +273,6 @@ if( x >= LDBL_MAX )
 	}
 
 
-/* Test for odd integer y.  */
-yoddint = 0;
-if( iyflg )
-	{
-        ya = ldexpl(y, -1);
-        yoddint = (ya != floorl(ya));
-	}
 
 if( x <= -LDBL_MAX )
 	{
@@ -315,7 +316,7 @@ if( x <= 0.0L )
 	else
 		{
 		if( iyflg == 0 )
-			return (x - x) / (x - x); /* (x<0)**(non-int) is NaN */
+                        return __math_invalidl(x); /* (x<0)**(non-int) is NaN */
 		nflg = 1;
 		}
 	}
