@@ -217,14 +217,14 @@ tgammal(long double x)
 long double p, q, z;
 int i;
 
-if( isnan(x) )
-	return((long double) NAN);
+if( isnanl(x) )
+        return(x + x);
 if(x == (long double) INFINITY)
 	return((long double) INFINITY);
 if(x == -(long double) INFINITY)
-	return(x - x);
+	return __math_invalid(x);
 if( x == 0.0L )
-	return( 1.0L / x );
+	return __math_divzero(__signbitl(x));
 q = fabsl(x);
 
 if( q > 13.0L )
@@ -236,7 +236,7 @@ if( q > 13.0L )
 		{
 		p = floorl(q);
 		if( p == q )
-			return (x - x) / (x - x);
+			return __math_invalid(x);
 		i = p;
 		if( (i & 1) == 0 )
 			sign = -1;
@@ -251,7 +251,7 @@ if( q > 13.0L )
 		if( z <= PIL/LDBL_MAX )
 			{
 goverf:
-			return( sign * (long double) INFINITY);
+                        return __math_oflowl(sign < 0);
 			}
 		z = PIL/z;
 		}

@@ -243,7 +243,7 @@ powl(long double x, long double y)
 	    {
 	      if (((ix - 0x3fff0000) | yisint) == 0)
 		{
-		  z = (z - z) / (z - z);	/* (-1)**non-int is NaN */
+                    z = __math_invalidl(z);	/* (-1)**non-int is NaN */
 		}
 	      else if (yisint == 1)
 		z = -z;		/* (x<0)**odd = -(|x|**odd) */
@@ -254,7 +254,7 @@ powl(long double x, long double y)
 
   /* (x<0)**(non-int) is NaN */
   if (((((u_int32_t) hx >> 31) - 1) | yisint) == 0)
-    return (x - x) / (x - x);
+    return __math_invalidl(x);
 
   /* |y| is huge.
      2^-16495 = 1/2 of smallest representable value.
@@ -265,15 +265,15 @@ powl(long double x, long double y)
       if (iy > 0x407d654b)
 	{
 	  if (ix <= 0x3ffeffff)
-	    return (hy < 0) ? huge * huge : tiny * tiny;
+	    return (hy < 0) ? __math_oflowl(0) : __math_uflowl(0);
 	  if (ix >= 0x3fff0000)
-	    return (hy > 0) ? huge * huge : tiny * tiny;
+	    return (hy > 0) ? __math_oflowl(0) : __math_uflowl(0);
 	}
       /* over/underflow if x is not close to one */
       if (ix < 0x3ffeffff)
-	return (hy < 0) ? huge * huge : tiny * tiny;
+	return (hy < 0) ? __math_oflowl(0) : __math_uflowl(0);
       if (ix > 0x3fff0000)
-	return (hy > 0) ? huge * huge : tiny * tiny;
+	return (hy > 0) ? __math_oflowl(0) : __math_uflowl(0);
     }
 
   n = 0;
