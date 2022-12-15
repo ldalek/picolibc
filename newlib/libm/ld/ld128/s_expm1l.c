@@ -153,7 +153,12 @@ expm1l(long double x)
   exp(x) - 1 = 2^k (qx + 1) - 1
 	     = 2^k qx + 2^k - 1.  */
 
-  px = ldexpl (1.0L, k);
-  x = px * qx + (px - 1.0L);
+  if (k == __LDBL_MAX_EXP__)
+      px = __LDBL_MAX__;
+  else
+      px = ldexpl (1.0L, k);
+  x = px - 1.0L;
+  if (!isinfl(x))
+      x += px * qx;
   return x;
 }
