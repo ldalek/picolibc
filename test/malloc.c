@@ -114,17 +114,21 @@ main(void)
 
 	void *big = malloc(1024);
 	memset(big, '1', 1024);
+        printf("big %p\n", big);
 	if (big) {
 		void *small = malloc(128);
 		memset(small, '2', 128);
+                printf("small %p\n", small);
 		if (small) {
+                        (void) atoi(small);
 			free(big);
 			char *med = realloc(small, 1024);
 			if (med) {
+                                printf("med %p\n", med);
 #ifdef _NANO_MALLOC
 				int i;
 				for (i = 128; i < 1024; i++)
-					if (med[i] != '1' && med[i] != 0) {
+					if (med[i] != 0) {
 						printf("looks like realloc read past old at %d (saw %d)\n", i, med[i]);
 						++result;
 					}
