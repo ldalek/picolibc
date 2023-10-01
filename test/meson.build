@@ -72,6 +72,7 @@ foreach target : targets
 		  link_depends:  _link_depends + _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'printff_scanff'
@@ -89,6 +90,7 @@ foreach target : targets
 		  link_depends:  _link_depends + _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'printfl_scanfl'
@@ -106,6 +108,7 @@ foreach target : targets
 		  link_depends:  _link_depends + _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'printfi_scanfi'
@@ -123,6 +126,7 @@ foreach target : targets
 		  link_depends:  _link_depends + _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'printfm_scanfm'
@@ -140,6 +144,7 @@ foreach target : targets
 		  link_depends:  _link_depends + _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'printf-tests'
@@ -157,6 +162,7 @@ foreach target : targets
 		  link_depends: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'printff-tests'
@@ -174,6 +180,7 @@ foreach target : targets
 		  link_depends: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'printfi-tests'
@@ -191,6 +198,7 @@ foreach target : targets
 		  link_depends: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'printfm-tests'
@@ -208,6 +216,7 @@ foreach target : targets
 		  link_depends: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'try-ilp32'
@@ -232,6 +241,7 @@ foreach target : targets
 		  link_depends: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'try-ilp32'
@@ -249,6 +259,7 @@ foreach target : targets
 		  link_with: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'hosted-exit'
@@ -268,6 +279,7 @@ foreach target : targets
 		  link_with: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   test(t1_fail_name,
@@ -278,6 +290,7 @@ foreach target : targets
 		  link_with: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env,
        should_fail: true
       )
@@ -297,6 +310,7 @@ foreach target : targets
 		  link_with: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env,
        should_fail: true
       )
@@ -322,6 +336,7 @@ foreach target : targets
 		    link_with: _libs,
 		    include_directories: inc),
          depends: bios_bin,
+         suite: 'test',
 	 env: test_env)
   endif
 
@@ -340,6 +355,7 @@ foreach target : targets
 		  link_with: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'rounding-mode'
@@ -357,6 +373,7 @@ foreach target : targets
 		  link_with: _libs,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env)
 
   t1 = 'test-except'
@@ -376,6 +393,7 @@ foreach target : targets
 		  link_depends:  _link_depends,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env,
        should_fail: true
       )
@@ -397,6 +415,7 @@ foreach target : targets
 		  link_depends:  _link_depends,
 		  include_directories: inc),
        depends: bios_bin,
+       suite: 'test',
        env: test_env,
        timeout: 90,
       )
@@ -462,6 +481,7 @@ foreach target : targets
 		    link_depends:  _link_depends,
 		    include_directories: inc),
 	 depends: bios_bin,
+         suite: 'test',
 	 env: test_env,
 	 should_fail: sanitize_trap_on_error
 	)
@@ -520,6 +540,7 @@ foreach target : targets
 		    link_depends:  _link_depends,
 		    include_directories: inc),
          depends: bios_bin,
+         suite: 'test',
 	 timeout: 60,
 	 env: test_env)
   endforeach
@@ -535,52 +556,61 @@ if enable_native_tests
 	 executable('long_double_native', 'long_double.c',
 		    c_args: native_c_args,
 		    link_args: native_c_args,
+                    suite: 'native',
 		    dependencies: native_lib_m))
     test('test-fma_native',
 	 executable('test-fma_native', 'test-fma.c',
 		    c_args: native_c_args,
 		    link_args: native_c_args,
+                    suite: 'native',
 		    dependencies: native_lib_m))
     test('math_errhandling_native',
 	 executable('math_errhandling_native', 'math_errhandling.c',
 		    c_args: native_c_args,
 		    link_args: native_c_args,
+                    suite: 'native',
 		    dependencies: native_lib_m))
     test('rounding-mode_native',
 	 executable('rounding-mode_native',
 		    ['rounding-mode.c', 'rounding-mode-sub.c'],
 		    c_args: native_c_args,
 		    link_args: native_c_args,
+                    suite: 'native',
 		    dependencies: native_lib_m))
     test('printf-tests_native',
 	 executable('printf-tests_native',
 		    'printf-tests.c',
 		    c_args: native_c_args,
 		    link_args: native_c_args,
+                    suite: 'native',
 		    dependencies: native_lib_m))
     test('printf_scanf_native',
 	 executable('printf_scanf_native',
 		    'printf_scanf.c',
 		    c_args: native_c_args,
 		    link_args: native_c_args,
+                    suite: 'native',
 		    dependencies: native_lib_m))
     test('test-efcvt_native',
 	 executable('test-efcvt_native',
 		    'test-efcvt.c',
 		    c_args: native_c_args,
 		    link_args: native_c_args,
+                    suite: 'native',
 		    dependencies: native_lib_m))
     test('test-strtod_native',
 	 executable('test-strtod_native',
 		    'test-strtod.c',
 		    c_args: native_c_args,
 		    link_args: native_c_args,
+                    suite: 'native',
 		    dependencies: native_lib_m))
   endif
 
   test('test-atomic-native',
        executable('test-atomic-native', 'test-atomic.c',
 		  c_args: native_c_args,
+                  suite: 'native',
 		  link_args: native_c_args))
 
 endif
