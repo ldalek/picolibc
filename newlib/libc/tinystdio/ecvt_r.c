@@ -41,7 +41,23 @@
 
 typedef double FLOAT;
 
+#if __SIZEOF_DOUBLE__ > 4
+typedef uint64_t UINTFLOAT;
+#define _NEED_IO_FLOAT64
 #include "dtoa_engine.h"
+#else
+typedef uint32_t UINTFLOAT;
+#define _NEED_IO_FLOAT32
+#define dtoa ftoa
+#define DTOA_MINUS FTOA_MINUS
+#define DTOA_ZERO  FTOA_ZERO
+#define DTOA_INF   FTOA_INF
+#define DTOA_NAN   FTOA_NAN
+#define DTOA_CARRY FTOA_CARRY
+#define DTOA_MAX_DIG FTOA_MAX_DIG
+#define __dtoa_engine(x,dtoa,dig,f,dec) __ftoa_engine(x,dtoa,dig,f,dec)
+#include "ftoa_engine.h"
+#endif
 
 int
 ecvt_r (double invalue,

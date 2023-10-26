@@ -34,22 +34,10 @@
 #include <float.h>
 #include <stdbool.h>
 
-#ifndef DBL_MAX_10_EXP
-#error DBL_MAX_10_EXP
-#endif
+#ifdef _NEED_IO_FLOAT32
 
-#ifndef DBL_MIN_10_EXP
-#error DBL_MIN_10_EXP
-#endif
-
-#ifndef DBL_DIG
-#error DBL_DIG
-#endif
-
-#ifdef _NEED_IO_FLOAT
-
-#define DTOA_MAX_10_EXP FLT_MAX_10_EXP
-#define DTOA_MIN_10_EXP FLT_MIN_10_EXP
+#define DTOA_MAX_10_EXP 38
+#define DTOA_MIN_10_EXP (-37)
 #define DTOA_DIG	9
 #define DTOA_MAX_DIG 	9
 
@@ -60,8 +48,8 @@
 
 #else
 
-#define DTOA_MAX_10_EXP DBL_MAX_10_EXP
-#define DTOA_MIN_10_EXP DBL_MIN_10_EXP
+#define DTOA_MAX_10_EXP 308
+#define DTOA_MIN_10_EXP (-307)
 #define DTOA_DIG 	17
 #define DTOA_MAX_DIG	17
 

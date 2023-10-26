@@ -30,6 +30,8 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "stdio_private.h"
+
 #define _WANT_IO_FLOAT
 
 typedef float FLOAT;
@@ -45,17 +47,17 @@ typedef float FLOAT;
 #pragma GCC optimize("O2")
 #endif
 
-float
+FLOAT32
 __atof_engine(uint32_t u32, int exp)
 {
-    float flt = u32;
+    FLOAT32 flt = u32;
 
     while (exp < 0) {
-        flt *= 1e-1f;
+        flt *= (FLOAT32) 1e-1f;
         exp++;
     }
     while (exp > 0) {
-        flt *= 1e1f;
+        flt *= (FLOAT32) 1e1f;
         exp--;
     }
     return flt;

@@ -53,10 +53,20 @@ static const char pstr_an[] = "an";
 #  define FLOAT_MANT_DIG        __DBL_MANT_DIG__
 #  define FLOAT_MAX_EXP         __DBL_MAX_EXP__
 #  define FLOAT_MIN_EXP         __DBL_MIN_EXP__
-#  define ASFLOAT(x)            _asdouble(x)
+#  if __SIZEOF_DOUBLE__ == 4
+#   define ASFLOAT(x)            ((double) _asfloat(x))
+#  else
+#   define ASFLOAT(x)            _asdouble(x)
+#  endif
 #  define TOFLOAT(x)            ((double) (x))
 typedef double FLOAT;
+#  if __SIZEOF_DOUBLE__ == 8
 typedef uint64_t UINTFLOAT;
+#   define _NEED_IO_FLOAT64
+#  elif __SIZEOF_DOUBLE__ == 4
+typedef uint32_t UINTFLOAT;
+#   define _NEED_IO_FLOAT32
+#  endif
 # elif defined(STRTOLD)
 #  define SCANF_LEVEL           SCANF_DBL
 #  define CHECK_LONG()          0
@@ -66,10 +76,20 @@ typedef uint64_t UINTFLOAT;
 #  define FLOAT_MAX_EXP         __LDBL_MAX_EXP__
 #  define FLOAT_MIN_EXP         __LDBL_MIN_EXP__
 #  define ASFLOAT(x)            aslongdouble(x)
-#  define TOFLOAT(x)            _u128_to_ld(x)
 typedef long double FLOAT;
+#  if __SIZEOF_LONG_DOUBLE__ > 8
 typedef _u128 UINTFLOAT;
-#define UINTFLOAT_128
+#   define TOFLOAT(x)            _u128_to_ld(x)
+#   define UINTFLOAT_128
+#  elif __SIZEOF_LONG_DOUBLE__ == 8
+typedef uint64_t UINTFLOAT;
+#   define _NEED_IO_FLOAT64
+#   define TOFLOAT(x)            ((long double) (x))
+#  elif __SIZEOF_LONG_DOUBLE__ == 4
+typedef uint32_t UINTFLOAT;
+#   define _NEED_IO_FLOAT32
+#   define TOFLOAT(x)            ((long double) (x))
+#  endif
 # elif defined(STRTOF)
 #  define SCANF_LEVEL           SCANF_FLT
 #  define CHECK_LONG()          0
@@ -82,6 +102,7 @@ typedef _u128 UINTFLOAT;
 #  define TOFLOAT(x)            ((float) (x))
 typedef float FLOAT;
 typedef uint32_t UINTFLOAT;
+#define _NEED_IO_FLOAT32
 # endif
 
 #define FLT_STREAM const char
@@ -105,9 +126,11 @@ static inline void scanf_ungetc(int c, const char *s, int *lenp)
 #define EOF -1
 
 #else
+
 # define CHECK_WIDTH()   (--width != 0)
 # define CHECK_RANGE(flt)
 # ifdef _NEED_IO_FLOAT
+
 #  define CHECK_LONG()          0
 #  define CHECK_LONG_LONG()     0
 #  define FLOAT_MANT_DIG        __FLT_MANT_DIG__
@@ -118,32 +141,62 @@ static inline void scanf_ungetc(int c, const char *s, int *lenp)
 
 typedef float FLOAT;
 typedef uint32_t UINTFLOAT;
+#define _NEED_IO_FLOAT32
 
 # elif defined(_NEED_IO_DOUBLE)
+
 #  ifdef _NEED_IO_LONG_DOUBLE
+
 #   define CHECK_LONG()         (flags & FL_LONG)
 #   define CHECK_LONG_LONG()    (flags & FL_LONGLONG)
 #   define FLOAT_MANT_DIG       __LDBL_MANT_DIG__
 #   define FLOAT_MAX_EXP        __LDBL_MAX_EXP__
 #   define FLOAT_MIN_EXP        __LDBL_MIN_EXP__
-#   define UINTFLOAT_128
 
 typedef long double FLOAT;
+#    define ASFLOAT(x) aslongdouble(x)
+
+#   if __SIZEOF_LONG_DOUBLE__ > 8
+#    define UINTFLOAT_128
+
 typedef _u128 UINTFLOAT;
 
-#   define ASFLOAT(x) aslongdouble(x)
-#   define TOFLOAT(x) _u128_to_ld(x)
+#    define TOFLOAT(x) _u128_to_ld(x)
+
+#   elif __SIZEOF_LONG_DOUBLE__ == 8
+#    define _NEED_IO_FLOAT64
+
+typedef uint64_t UINTFLOAT;
+
+#    define TOFLOAT(x) ((long double) (x))
+#   elif __SIZEOF_LONG_DOUBLE__ == 4
+#    define _NEED_IO_FLOAT32
+
+typedef uint32_t UINTFLOAT;
+
+#    define TOFLOAT(x) ((long double) (x))
+#   endif
 #  else
 #   define CHECK_LONG()         (flags & (FL_LONG|FL_LONGLONG))
 #   define CHECK_LONG_LONG()    0
 #   define FLOAT_MANT_DIG       __DBL_MANT_DIG__
 #   define FLOAT_MAX_EXP        __DBL_MAX_EXP__
 #   define FLOAT_MIN_EXP        __DBL_MIN_EXP__
-#   define ASFLOAT(x) _asdouble(x)
+#   if __SIZEOF_DOUBLE__ == 4
+#    define ASFLOAT(x)            ((double) _asfloat(x))
+#   else
+#    define ASFLOAT(x)            _asdouble(x)
+#   endif
 #   define TOFLOAT(x) ((double) (x))
 
 typedef double FLOAT;
+#if __SIZEOF_DOUBLE__ == 8
 typedef uint64_t UINTFLOAT;
+#define _NEED_IO_FLOAT64
+#else
+typedef uint32_t UINTFLOAT;
+#define _NEED_IO_FLOAT32
+#endif
 
 #  endif
 # else
@@ -254,11 +307,24 @@ conv_flt (FLT_STREAM *stream, int *lenp, width_t width, void *addr, uint16_t fla
         exp = 0;
 	uint = U32_TO_UF(0);
 #define uintdigitsmax_10_float  8
-#define uintdigitsmax_10_double 16
-#define uintdigitsmax_10_long_double    32
 #define uintdigitsmax_16_float  7
+#if __SIZEOF_DOUBLE__ == 8
+#define uintdigitsmax_10_double 16
 #define uintdigitsmax_16_double 15
+#elif __SIZEOF_DOUBLE__ ==4
+#define uintdigitsmax_10_double 8
+#define uintdigitsmax_16_double 7
+#endif
+#if __SIZEOF_LONG_DOUBLE__ > 8
+#define uintdigitsmax_10_long_double    32
 #define uintdigitsmax_16_long_double    30
+#elif __SIZEOF_LONG_DOUBLE__ == 8
+#define uintdigitsmax_10_long_double    16
+#define uintdigitsmax_16_long_double    15
+#elif __SIZEOF_LONG_DOUBLE__ == 4
+#define uintdigitsmax_10_long_double    8
+#define uintdigitsmax_16_long_double    7
+#endif
 
 #ifdef _NEED_IO_C99_FORMATS
         int base = 10;
@@ -487,11 +553,12 @@ conv_flt (FLT_STREAM *stream, int *lenp, width_t width, void *addr, uint16_t fla
         else
 #endif
         {
-            if (CHECK_LONG_LONG())
+            if (CHECK_LONG_LONG() && __SIZEOF_LONG_DOUBLE__ > 8)
             {
                 flt = (FLOAT) __atold_engine(UF_TO_U128(uint), exp);
             }
-            else if (CHECK_LONG())
+            else if ((CHECK_LONG() && __SIZEOF_DOUBLE__ == 8) ||
+                     (CHECK_LONG_LONG() && __SIZEOF_LONG_DOUBLE__ == 8))
             {
 		if (uintdigits + exp <= -324) {
                     // Number is less than 1e-324, which should be rounded down to 0; return +/-0.0.
