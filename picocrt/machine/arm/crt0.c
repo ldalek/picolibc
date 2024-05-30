@@ -33,6 +33,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <picolibc.h>
 #include "../../crt0.h"
 
 #if __ARM_ARCH_PROFILE == 'M'
@@ -92,7 +93,7 @@ _start(void)
 	__start();
 }
 
-#else
+#else /*  __ARM_ARCH_PROFILE == 'M' */
 
 /*
  * Regular ARM has an 8-entry exception vector and starts without SP
@@ -106,6 +107,34 @@ _cstart(void)
 }
 
 extern char __stack[];
+
+#ifdef _PICOCRT_ENABLE_MMU
+
+#if __ARM_ARCH >= 7 && __ARM_ARCH_PROFILE != 'R'
+
+/*
+ * We need 2048 1MB mappings to cover the usual Normal memory space,
+ * which runs from 0x00000000 to 0x7fffffff
+ */
+#define MMU_MAPPING_COUNT 2048
+extern uint32_t __identity_page_table[MMU_MAPPING_COUNT];
+#define MMU_TYPE_1MB (0x2 << 0)
+#define MMU_RW (0x3 << 10)
+#define MMU_NORMAL_CACHEABLE ((0x0 << 12) | (0x3 << 2))
+#define MMU_MAPPING_FLAGS (MMU_TYPE_1MB | MMU_RW | MMU_NORMAL_CACHEABLE)
+__asm__(
+    ".section .rodata\n"
+    ".global __identity_page_table\n"
+    ".balign 16384\n"
+    "__identity_page_table:\n"
+    ".set _i, 0\n"
+    ".rept " __XSTRING(MMU_MAPPING_COUNT) "\n"
+    "  .4byte (_i << 20) |" __XSTRING(MMU_MAPPING_FLAGS) "\n"
+    "  .set _i, _i + 1\n"
+    ".endr\n"
+    ".size __identity_page_table, " __XSTRING(MMU_MAPPING_COUNT * 4) "\n"
+);
+#endif
 
 void __attribute__((naked)) __section(".init") __attribute__((used))
 _start(void)
@@ -131,6 +160,55 @@ _start(void)
 	/* Enable FPU */
 	__asm__("vmsr fpexc, %0" : : "r" (0x40000000));
 #endif
+
+#ifdef _PICOCRT_ENABLE_MMU
+
+#if __ARM_ARCH >= 7 && __ARM_ARCH_PROFILE != 'R'
+
+#define SCTLR_MMU (1 << 0)
+#define SCTLR_DATA_L2 (1 << 2)
+#define SCTLR_BRANCH_PRED (1 << 11)
+#define SCTLR_ICACHE (1 << 12)
+
+        uint32_t        mmfr0;
+        __asm__("mrc p15, 0, %0, c0, c1, 4" : "=r" (mmfr0));
+
+        /* Check to see if the processor supports VMSAv7 or better */
+        if ((mmfr0 & 0xf) >= 3)
+        {
+                /* We have to set up an identity map and enable the MMU for caches.
+                 * Additionally, all page table entries are set to Domain 0, so set up DACR
+                 * so that Domain zero has permission checks enabled rather than "deny all".
+                 */
+
+                /* Set DACR Domain 0 permissions checked */
+                __asm__("mcr p15, 0, %0, c3, c0, 0\n" :: "r" (1));
+
+                /*
+                 * Write TTBR
+                 *
+                 * No DSB since tables are statically initialized and dcache is off.
+                 * We or __identity_page_table with 0x3 to set the cacheable flag bits.
+                 */
+                __asm__("mcr p15, 0, %0, c2, c0, 0\n"
+                        :: "r" ((uintptr_t)__identity_page_table | 0x3));
+
+                /* Note: we assume Data+L2 cache has been invalidated by reset. */
+                __asm__("mcr p15, 0, %0, c7, c5, 0\n" :: "r" (0)); /* ICIALLU: invalidate instruction cache */
+                __asm__("mcr p15, 0, %0, c8, c7, 0\n" :: "r" (0)); /* TLBIALL: invalidate TLB */
+                __asm__("mcr p15, 0, %0, c7, c5, 6\n" :: "r" (0)); /* BPIALL: invalidate branch predictor */
+                __asm__("isb\n");
+
+                /* Enable caches, branch prediction and the MMU */
+                uint32_t sctlr;
+                __asm__("mrc p15, 0, %0, c1, c0, 0" : "=r" (sctlr));
+                sctlr |= SCTLR_ICACHE | SCTLR_BRANCH_PRED | SCTLR_DATA_L2 | SCTLR_MMU;
+                __asm__("mcr p15, 0, %0, c1, c0, 0\n" :: "r" (sctlr));
+                __asm__("isb\n");
+        }
+#endif
+
+#endif /* _PICOCRT_ENABLE_MMU */
 
 	/* Branch to C code */
 	__asm__("b _cstart");
@@ -239,7 +317,7 @@ arm_usagefault_isr(void)
     __asm__("bl  arm_fault");
 }
 
-#else
+#else /* __ARM_ARCH_PROFILE == 'M' */
 
 struct fault {
     unsigned int        r[7];
@@ -304,7 +382,6 @@ arm_data_abort_vector(void)
     __asm__("bl  arm_fault");
 }
 
-#endif
+#endif /* else __ARM_ARCH_PROFILE == 'M' */
 
-#endif
-
+#endif /* CRT0_SEMIHOST */
