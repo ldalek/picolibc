@@ -1,3 +1,4 @@
+#include <sys/features.h>
 
 #ifdef _FVWRITE_IN_STREAMIO
 
