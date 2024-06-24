@@ -8,6 +8,8 @@
  * ====================================================
  */
 
+#include <sys/features.h>
+
 #if !defined(_SOFT_FLOAT)
 
 /* 

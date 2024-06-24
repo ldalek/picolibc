@@ -42,6 +42,8 @@
 	   redundant.  */
 
 	/* This version uses Thumb-2 code.  */
+#include <sys/features.h>
+
 	.thumb
 	.syntax unified
 

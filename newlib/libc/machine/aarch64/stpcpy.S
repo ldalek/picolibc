@@ -5,6 +5,8 @@
  * SPDX-License-Identifier: MIT 
  */
 
+#include <sys/features.h>
+
 #define BUILD_STPCPY 1
 
 #include "strcpy.S"

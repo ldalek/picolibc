@@ -1,3 +1,5 @@
+#include <sys/features.h>
+
 ! Entry: arg0: string start address
 ! Exit:  result: length
 !

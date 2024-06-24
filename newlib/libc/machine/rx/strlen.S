@@ -1,6 +1,8 @@
 /*
 Copyright (c) 2009 Nick Clifton <nickc@redhat.com>
  */
+#include <sys/features.h>
+
 	.file	"strlen.S"
 
 	.section .text

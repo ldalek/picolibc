@@ -28,5 +28,7 @@
   POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 #define snprintf    sniprintf
 #include "snprintf.S"

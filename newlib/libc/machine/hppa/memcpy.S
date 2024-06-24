@@ -20,6 +20,8 @@
  * Copy n characters from s2 to s1; returns s1.
  */
 
+#include <sys/features.h>
+
 #define d_addr  arg0
 #define s_addr  arg1
 #define count   arg2

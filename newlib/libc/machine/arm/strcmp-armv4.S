@@ -31,6 +31,8 @@
 	   revisions of the architecture.  This version can support ARMv4T
 	   ARM/Thumb interworking.  */
 /* Parameters and result.  */
+#include <sys/features.h>
+
 #define src1		r0
 #define src2		r1
 #define result		r0	/* Overlaps src1.  */

@@ -8,6 +8,8 @@
  * ====================================================
  */
 
+#include <sys/features.h>
+
 #ifndef __x86_64
 #include "../i386/memset.S"
 #else

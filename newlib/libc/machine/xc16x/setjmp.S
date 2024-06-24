@@ -11,6 +11,8 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+#include <sys/features.h>
+
 .section .text
 .global setjmp
 _setjmp:

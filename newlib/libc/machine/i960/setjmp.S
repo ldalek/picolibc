@@ -33,6 +33,8 @@
 /*      setjmp(), longjmp()                                                   */
 /*                                                                            */
 /******************************************************************************/
+#include <sys/features.h>
+
 	.file "setjmp.as"
 	.text
 	/* .link_pix */

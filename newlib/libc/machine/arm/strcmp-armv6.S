@@ -40,6 +40,8 @@
 	   verifying a hit in a hash table), then this check is largely
 	   redundant.  */
 
+#include <sys/features.h>
+
 	.arm
 
 /* Parameters and result.  */

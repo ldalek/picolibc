@@ -11,6 +11,8 @@
  * MTE compatible.
  */
 
+#include <sys/features.h>
+
 #if defined (__OPTIMIZE_SIZE__) || defined (PREFER_SIZE_OVER_SPEED)
 /* See memrchr-stub.c */
 #else

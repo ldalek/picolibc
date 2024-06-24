@@ -48,6 +48,8 @@
  *      |      .      |        
  */        
 
+#include <sys/features.h>
+
     
 .globl longjmp
 .section .text

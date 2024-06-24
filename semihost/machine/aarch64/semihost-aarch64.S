@@ -33,6 +33,8 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 	.text
 	.p2align 0
 	.global sys_semihost

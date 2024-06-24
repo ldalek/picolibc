@@ -1,6 +1,8 @@
 /*
 Copyright (c) 2009 Nick Clifton <nickc@redhat.com>
  */
+#include <sys/features.h>
+
 	.file	"mempcpy.S"
 
 	.section .text

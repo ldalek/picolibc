@@ -1,4 +1,6 @@
 /* Copyright (c) 2009 Nick Clifton <nickc@redhat.com> */
+#include <sys/features.h>
+
 	.file	"memchr.S"
 
 	.section .text

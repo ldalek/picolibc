@@ -9,6 +9,8 @@
    http://www.opensource.org/licenses.
 */
 
+#include <sys/features.h>
+
 	.section	.text
 	.align	3
 	.globl	setjmp

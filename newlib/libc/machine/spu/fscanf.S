@@ -28,6 +28,8 @@
   POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 #include "c99ppe.h"
 
 	.text

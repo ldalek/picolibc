@@ -8,6 +8,8 @@
  * ====================================================
  */
 
+#include <sys/features.h>
+
 	#include "i386mach.h"
 
 	.global	SYM (memchr)

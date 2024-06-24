@@ -28,5 +28,7 @@
   POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 #define fprintf    fiprintf
 #include "fprintf.S"

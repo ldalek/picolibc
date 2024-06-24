@@ -13,6 +13,8 @@
  */
 /* setjmp/longjmp routines. */
 
+#include <sys/features.h>
+
 	.sect .text
 	.global setjmp
 	.global longjmp

@@ -13,6 +13,8 @@
  * they apply.
  */
 
+#include <sys/features.h>
+
 #include "m68kasm.h"
 
 	.text

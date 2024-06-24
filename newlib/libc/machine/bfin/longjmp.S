@@ -14,6 +14,8 @@
  * they apply.
  */
 
+#include <sys/features.h>
+
 #define _ASM
 #define _SETJMP_H
 

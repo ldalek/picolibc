@@ -26,6 +26,8 @@
  **	 0   4   8   12  16  20
  */
 
+#include <sys/features.h>
+
        #include "i386mach.h"
 
         .global SYM (setjmp)

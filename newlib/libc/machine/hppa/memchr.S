@@ -22,6 +22,8 @@
  * or null if c does not occur.
  */
 
+#include <sys/features.h>
+
 #include "DEFS.h"
 
 #define FROM	arg0

@@ -1,5 +1,7 @@
 /* Copyright 2003 SuperH Ltd.  */
 
+#include <sys/features.h>
+
 #include "asm.h"
 
 #ifdef __SH5__

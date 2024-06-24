@@ -38,6 +38,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     Return value:
        strcpy returns the dest as given.
 */
+#include <sys/features.h>
+
 	.text
 	.align	2
 	.globl	strcpy

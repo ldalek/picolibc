@@ -29,6 +29,8 @@
  * 		    = 0 iff s1 lexicographically equal to s2
  */
 
+#include <sys/features.h>
+
 #include "DEFS.h"
 
 #define s1	 26

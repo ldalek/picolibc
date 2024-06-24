@@ -3,6 +3,8 @@
 
 
 /* int setjmp (jmp_buf);  */
+#include <sys/features.h>
+
 	.globl	setjmp
 	.ent	setjmp
 setjmp:

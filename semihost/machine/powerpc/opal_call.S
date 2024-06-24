@@ -33,6 +33,8 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 	.text
 	.section	.text.opal_call
 	.align		2

@@ -8,6 +8,8 @@
  * ====================================================
  */
 
+#include <sys/features.h>
+
   #include "x86_64mach.h"
 
   .global SYM (memcpy)

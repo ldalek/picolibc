@@ -14,6 +14,8 @@
 /* void *memmove(void *dest, const void *src, size_t length);
  */
 
+#include <sys/features.h>
+
 	name	"memmove.S"
 
 	.text

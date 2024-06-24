@@ -33,6 +33,8 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 	.syntax	unified
 	.text
 	.align 4

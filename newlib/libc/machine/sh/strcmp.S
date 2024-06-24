@@ -1,5 +1,7 @@
 /* SH5 code Copyright 2002 SuperH Ltd. */
 
+#include <sys/features.h>
+
 #include "asm.h"
 
 ENTRY(strcmp)

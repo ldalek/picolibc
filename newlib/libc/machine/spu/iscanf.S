@@ -28,5 +28,7 @@
   POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 #define scanf    iscanf
 #include "scanf.S"

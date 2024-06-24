@@ -1,4 +1,6 @@
 /*  Copyright (c) 2003 DJ Delorie, Red Hat Inc. */
+#include <sys/features.h>
+
 #
 #  Setjmp/longjmp for MeP
 #

@@ -1,3 +1,5 @@
+#include <sys/features.h>
+
 !
 ! Fast SH memset
 !

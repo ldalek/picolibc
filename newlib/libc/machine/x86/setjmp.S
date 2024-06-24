@@ -1,3 +1,5 @@
+#include <sys/features.h>
+
 #ifdef __x86_64
 #include "setjmp-64.S"
 #else

@@ -47,6 +47,8 @@
  *      |      .      |        
  */        
 
+#include <sys/features.h>
+
     
 .globl setjmp
 .section .text
