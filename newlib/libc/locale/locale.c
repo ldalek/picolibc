@@ -143,9 +143,9 @@ No supporting OS subroutines are required.
  * SUCH DAMAGE.
  */
 
-#define _DEFAULT_SOURCE
+#define _GNU_SOURCE
 #define _PICOLIBC_CTYPE_SMALL 0
-#include <newlib.h>
+#include <sys/features.h>
 #include <errno.h>
 #include <string.h>
 #include <limits.h>

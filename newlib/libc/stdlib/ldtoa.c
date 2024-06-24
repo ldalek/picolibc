@@ -3,8 +3,7 @@
   */
 
 #define _DEFAULT_SOURCE
-#include <newlib.h>
-#include <sys/config.h>
+#include <sys/features.h>
 
 #ifndef _USE_GDTOA
 #include <_ansi.h>

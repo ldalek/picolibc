@@ -4,7 +4,7 @@ Copyright (c) 2002 Thomas Fitzsimmons <fitzsim@redhat.com>
 /* doc in mbsnrtowcs.c */
 
 #define _DEFAULT_SOURCE
-#include <newlib.h>
+#include <sys/features.h>
 #include <wchar.h>
 #include <stdlib.h>
 #include <stdio.h>

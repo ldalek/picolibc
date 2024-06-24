@@ -39,9 +39,10 @@ effects vary with the locale.
 <<mblen>> requires no supporting OS subroutines.
 */
 
+#include <sys/config.h>
+
 #ifndef _REENT_ONLY
 
-#include <newlib.h>
 #include <stdlib.h>
 #include <wchar.h>
 #include "local.h"

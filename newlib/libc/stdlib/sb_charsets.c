@@ -1,5 +1,5 @@
 /* Copyright (c) 2009 Corinna Vinschen <corinna@vinschen.de> */
-#include <newlib.h>
+#include <sys/features.h>
 #include <wchar.h>
 
 #ifdef _MB_CAPABLE

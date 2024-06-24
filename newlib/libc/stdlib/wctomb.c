@@ -42,9 +42,10 @@ effects vary with the locale.
 <<wctomb>> requires no supporting OS subroutines.
 */
 
+#include <sys/features.h>
+
 #ifndef _REENT_ONLY
 
-#include <newlib.h>
 #include <stdlib.h>
 #include <errno.h>
 #include "local.h"

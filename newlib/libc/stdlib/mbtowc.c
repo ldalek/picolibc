@@ -45,9 +45,9 @@ effects vary with the locale.
 <<mbtowc>> requires no supporting OS subroutines.
 */
 
+#include <sys/features.h>
 #ifndef _REENT_ONLY
 
-#include <newlib.h>
 #include <stdlib.h>
 #include <wchar.h>
 #include "local.h"

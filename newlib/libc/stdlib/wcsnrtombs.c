@@ -64,7 +64,7 @@ PORTABILITY
 <<wcsnrtombs>> is defined by the POSIX.1-2008 standard.
 */
 
-#include <newlib.h>
+#include <sys/features.h>
 #include <wchar.h>
 #include <stdlib.h>
 #include <stdio.h>

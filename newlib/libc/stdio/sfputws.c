@@ -1,4 +1,3 @@
-#include <newlib.h>
 
 #ifndef _FVWRITE_IN_STREAMIO
 
