@@ -26,6 +26,8 @@
    IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
    POSSIBILITY OF SUCH DAMAGE.  */
 
+#include <sys/features.h>
+
 typedef void (*vfnp) (void);
 
 /* The guts of the _Libctors and _Libdtors is "optimized" away into

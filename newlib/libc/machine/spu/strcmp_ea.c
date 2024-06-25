@@ -29,6 +29,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
+#include <sys/features.h>
+
 #include <string.h>
 #include <stddef.h>
 #include <sys/param.h>

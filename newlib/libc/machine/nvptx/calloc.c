@@ -13,6 +13,8 @@
  * they apply.
  */
 
+#include <sys/features.h>
+
 #include <stdlib.h>
 #include <string.h>
 

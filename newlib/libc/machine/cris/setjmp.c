@@ -54,6 +54,8 @@
    jmp_buf[17] - CCR
    */
 
+#include <sys/features.h>
+
 #include <setjmp.h>
 
 int

@@ -27,6 +27,8 @@
 /* The structure of the following #if #else #endif conditional chain
    must match the chain in memchr.S.  */
 
+#include <sys/features.h>
+
 #include "machine/acle-compat.h"
 
 #if defined (__ARM_NEON__) || defined (__ARM_NEON)

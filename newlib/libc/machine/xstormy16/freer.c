@@ -1,3 +1,5 @@
+#include <sys/features.h>
+
 #include <malloc.h>
 
 void

@@ -30,6 +30,8 @@ POSSIBILITY OF SUCH DAMAGE.
 Author: Joel Schopp <jschopp@austin.ibm.com>
 */
 
+#include <sys/features.h>
+
 #include <stdio.h>
 
 #include "c99ppe.h"

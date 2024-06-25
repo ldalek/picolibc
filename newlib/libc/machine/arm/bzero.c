@@ -26,6 +26,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 #include "../../string/bzero.c"
 
 /* Support the alias for the __aeabi_memclr which may

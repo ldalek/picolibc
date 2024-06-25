@@ -29,6 +29,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
+#include <sys/features.h>
+
 #include <stddef.h>
 #include <sys/mman.h>
 #include "ea_internal.h"

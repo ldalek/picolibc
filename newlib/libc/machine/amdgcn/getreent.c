@@ -13,6 +13,8 @@ they apply.
  */
 /* get thread-specific reentrant pointer */
 
+#include <sys/features.h>
+
 #include <reent.h>
 #include <stdint.h>
 #include <stdlib.h>

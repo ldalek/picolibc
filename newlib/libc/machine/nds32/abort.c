@@ -55,6 +55,8 @@ ANSI C requires <<abort>>.
 Supporting OS subroutines required: <<_exit>>.
 */
 
+#include <sys/features.h>
+
 #include <unistd.h>
 
 void

@@ -58,6 +58,8 @@ QUICKREF
 	strcmp ansi pure
 */
 
+#include <sys/features.h>
+
 #include <string.h>
 #include <limits.h>
 

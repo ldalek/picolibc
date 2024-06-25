@@ -33,6 +33,8 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/features.h>
+
 #include "../../string/memmove.c"
 
 /* Support the alias for the __aeabi_memmove which may

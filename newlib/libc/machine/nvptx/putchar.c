@@ -13,6 +13,8 @@
  * they apply.
  */
 
+#include <sys/features.h>
+
 #include <stdarg.h>
 
 extern int vprintf (const char *, va_list);

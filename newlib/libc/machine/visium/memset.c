@@ -29,6 +29,8 @@
 
 /* This file must be kept in sync with libgcc/config/visium/memset.c  */
 
+#include <sys/features.h>
+
 #include <stddef.h>
 #include "memset.h"
 #include "../../string/local.h"

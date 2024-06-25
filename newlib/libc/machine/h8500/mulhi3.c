@@ -16,6 +16,8 @@ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
 
 
+#include <sys/features.h>
+
 short 
 __mulhi3(short a, short b)
 {

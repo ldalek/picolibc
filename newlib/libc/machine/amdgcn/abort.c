@@ -13,6 +13,8 @@
  * they apply.
  */
 
+#include <sys/features.h>
+
 #include <unistd.h>
 #include <signal.h>
 #include "exit-value.h"

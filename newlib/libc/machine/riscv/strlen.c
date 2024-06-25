@@ -9,6 +9,8 @@
    http://www.opensource.org/licenses.
 */
 
+#include <sys/features.h>
+
 #include <string.h>
 #include <stdint.h>
 

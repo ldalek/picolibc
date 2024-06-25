@@ -29,6 +29,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
+#include <sys/features.h>
+
 #include <stddef.h>
 #include <errno.h>
 #include <sys/mman.h>

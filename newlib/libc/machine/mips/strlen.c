@@ -15,6 +15,8 @@
  * they apply.
  */
 
+#include <sys/features.h>
+
 #include <stddef.h>
 #include <string.h>
 

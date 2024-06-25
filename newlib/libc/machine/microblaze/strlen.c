@@ -55,6 +55,8 @@ QUICKREF
 	strlen ansi pure
 */
 
+#include <sys/features.h>
+
 #include <_ansi.h>
 #include <string.h>
 #include <limits.h>

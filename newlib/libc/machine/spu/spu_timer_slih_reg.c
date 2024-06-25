@@ -30,6 +30,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 /* Services for SLIH registration.  */
+#include <sys/features.h>
+
 #include <spu_intrinsics.h>
 #include <spu_timer.h>
 

@@ -29,6 +29,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
+#include <sys/features.h>
+
 #include <stddef.h>
 #include <spu_cache.h>
 #include "ea_internal.h"

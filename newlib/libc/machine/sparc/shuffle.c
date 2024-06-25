@@ -18,6 +18,8 @@ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
    This file is in the public domain.  */
 
+#include <sys/features.h>
+
 #ifdef __sparclet__
 
 int
