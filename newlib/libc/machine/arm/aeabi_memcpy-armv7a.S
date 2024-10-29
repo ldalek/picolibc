@@ -224,9 +224,19 @@ src_not_word_aligned:
 
 7:
         /* Copy 64 bytes in every loop iteration.  */
-        .irp    offset, #0, #4, #8, #12, #16, #20, #24, #28, #32, #36, #40, #44, #48, #52, #56, #60
-        ldr     r3, [r1, \offset]
-        str     r3, [r0, \offset]
+        .irp    offset, 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60
+#ifdef __ARM_FEATURE_UNALIGNED
+        ldr     r3, [r1, #\offset]
+#else
+	ldrb	r3, [r1, #(\offset + 0)]
+	ldrb	r4, [r1, #(\offset + 1)]
+	ldrb	r5, [r1, #(\offset + 2)]
+	ldrb	ip, [r1, #(\offset + 3)]
+	orr	r3, r3, r4, lsl #8
+	orr	r3, r3, r5, lsl #16
+	orr	r3, r3, ip, lsl #24
+#endif
+        str     r3, [r0, #\offset]
         .endr
 
         add     r0, r0, #64
