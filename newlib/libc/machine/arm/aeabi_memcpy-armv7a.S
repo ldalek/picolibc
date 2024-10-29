@@ -35,6 +35,9 @@
 	.type   memcpy, %function
 	ASM_ALIAS __aeabi_memcpy, memcpy
 memcpy:
+	.fnstart
+	.cfi_sections .debug_frame
+	.cfi_startproc
 	/* Assumes that n >= 0, and dst, src are valid pointers.
           If there is at least 8 bytes to copy, use LDRD/STRD.
           If src and dst are misaligned with different offsets,
@@ -49,6 +52,10 @@ memcpy:
           (highest numbered register at highest address).  */
         push {r0, lr}
         strd r4, r5, [sp, #-8]!
+	.cfi_def_cfa sp, 16
+	.cfi_offset lr, -4
+	.cfi_offset 5, -8
+	.cfi_offset 4, -12
 
         /* Get copying of tiny blocks out of the way first.  */
         /* Is there at least 4 bytes to copy?  */
@@ -242,31 +249,50 @@ src_not_word_aligned:
         bge     9b
 
         b       copy_less_than_4
-
+	.cfi_endproc
+	.cantunwind
+	.fnend
 
 	.syntax unified
 	.global __aeabi_memcpy4
 	.type   __aeabi_memcpy4, %function
 __aeabi_memcpy4:
 	/* Assumes that both of its arguments are 4-byte aligned.  */
+	.fnstart
+	.cfi_sections .debug_frame
+	.cfi_startproc
 
         push {r0, lr}
         strd r4, r5, [sp, #-8]!
+	.cfi_def_cfa sp, 16
+	.cfi_offset lr, -4
+	.cfi_offset 5, -8
+	.cfi_offset 4, -12
 
         /* Is there at least 4 bytes to copy?  */
         subs    r2, r2, #4
         blt     copy_less_than_4       /* If n < 4.  */
 
 	bl	word_aligned
+	.cfi_endproc
+	.cantunwind
+	.fnend
 
 	.syntax unified
 	.global __aeabi_memcpy8
 	.type   __aeabi_memcpy8, %function
 __aeabi_memcpy8:
 	/* Assumes that both of its arguments are 8-byte aligned.  */
+	.fnstart
+	.cfi_sections .debug_frame
+	.cfi_startproc
 
         push {r0, lr}
         strd r4, r5, [sp, #-8]!
+	.cfi_def_cfa sp, 16
+	.cfi_offset lr, -4
+	.cfi_offset 5, -8
+	.cfi_offset 4, -12
 
 	/* Is there at least 4 bytes to copy?  */
         subs    r2, r2, #4
@@ -281,3 +307,6 @@ __aeabi_memcpy8:
 	blt	copy_less_than_64	/* if n + 8 < 64.  */
 
 	bl	two_word_aligned
+	.cfi_endproc
+	.cantunwind
+	.fnend
